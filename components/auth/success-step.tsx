@@ -18,11 +18,11 @@ export function SuccessStep({ formData }: SuccessStepProps) {
             <CheckCircle className="w-8 h-8 text-white" />
           </div>
         </div>
-        <CardTitle className="text-2xl text-white">Application Submitted Successfully!</CardTitle>
+        <CardTitle className="text-2xl text-gray-900">Application Submitted Successfully!</CardTitle>
       </CardHeader>
       <CardContent className="text-center space-y-6">
-        <div className="bg-slate-700/30 border border-slate-600 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-white mb-4">What happens next?</h3>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">What happens next?</h3>
 
           <div className="space-y-4 text-left">
             <div className="flex items-start space-x-3">
@@ -30,8 +30,8 @@ export function SuccessStep({ formData }: SuccessStepProps) {
                 1
               </div>
               <div>
-                <h4 className="text-white font-medium">Application Review</h4>
-                <p className="text-slate-300 text-sm">
+                <h4 className="text-gray-900 font-medium">Application Review</h4>
+                <p className="text-gray-600 text-sm">
                   Our compliance team will review your application and documents within 2-3 business days.
                 </p>
               </div>
@@ -42,8 +42,8 @@ export function SuccessStep({ formData }: SuccessStepProps) {
                 2
               </div>
               <div>
-                <h4 className="text-white font-medium">Identity Verification</h4>
-                <p className="text-slate-300 text-sm">
+                <h4 className="text-gray-900 font-medium">Identity Verification</h4>
+                <p className="text-gray-600 text-sm">
                   We'll verify your identity and documents using our secure verification system.
                 </p>
               </div>
@@ -54,8 +54,8 @@ export function SuccessStep({ formData }: SuccessStepProps) {
                 3
               </div>
               <div>
-                <h4 className="text-white font-medium">Account Approval</h4>
-                <p className="text-slate-300 text-sm">
+                <h4 className="text-gray-900 font-medium">Account Approval</h4>
+                <p className="text-gray-600 text-sm">
                   Once approved, you'll receive login credentials and can begin investing.
                 </p>
               </div>
@@ -63,46 +63,46 @@ export function SuccessStep({ formData }: SuccessStepProps) {
           </div>
         </div>
 
-        <div className="bg-blue-900/20 border border-blue-700 rounded-lg p-4">
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
           <div className="flex items-center justify-center mb-2">
             <Mail className="w-5 h-5 text-blue-400 mr-2" />
-            <span className="text-blue-200 font-medium">Confirmation Email Sent</span>
+            <span className="text-blue-800 font-medium">Confirmation Email Sent</span>
           </div>
-          <p className="text-blue-200 text-sm">
+          <p className="text-blue-800 text-sm">
             We've sent a confirmation email to <strong>{formData.email}</strong> with your application reference number.
           </p>
         </div>
 
-        <div className="bg-amber-900/20 border border-amber-700 rounded-lg p-4">
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
           <div className="flex items-center justify-center mb-2">
             <Clock className="w-5 h-5 text-amber-400 mr-2" />
-            <span className="text-amber-200 font-medium">Processing Time</span>
+            <span className="text-amber-800 font-medium">Processing Time</span>
           </div>
-          <p className="text-amber-200 text-sm">
+          <p className="text-amber-800 text-sm">
             Most applications are processed within 2-3 business days. Complex applications may take up to 5 business
             days.
           </p>
         </div>
 
         <div className="space-y-4 pt-6">
-          <h4 className="text-white font-medium">Need Help?</h4>
+          <h4 className="text-gray-900 font-medium">Need Help?</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="text-center">
-              <p className="text-slate-300 text-sm mb-2">Questions about your application?</p>
-              <Button variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-700 bg-transparent">
+              <p className="text-gray-600 text-sm mb-2">Questions about your application?</p>
+              <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50 bg-white">
                 Contact Support
               </Button>
             </div>
             <div className="text-center">
-              <p className="text-slate-300 text-sm mb-2">Want to learn more?</p>
-              <Button variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-700 bg-transparent">
+              <p className="text-gray-600 text-sm mb-2">Want to learn more?</p>
+              <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50 bg-white">
                 View Resources
               </Button>
             </div>
           </div>
         </div>
 
-        <div className="pt-6 border-t border-slate-700">
+        <div className="pt-6 border-t border-gray-200">
           <Link href="/">
             <Button className="bg-amber-600 hover:bg-amber-700 text-white">
               Return to Homepage
@@ -111,7 +111,7 @@ export function SuccessStep({ formData }: SuccessStepProps) {
           </Link>
         </div>
 
-        <div className="text-xs text-slate-400">Application Reference: MC-{Date.now().toString().slice(-8)}</div>
+        <div className="text-xs text-gray-500">Application Reference: MC-{Date.now().toString().slice(-8)}</div>
       </CardContent>
     </>
   )

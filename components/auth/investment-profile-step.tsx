@@ -42,28 +42,28 @@ export function InvestmentProfileStep({ onNext, onBack, initialData }: Investmen
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-white flex items-center">
+        <CardTitle className="text-gray-900 flex items-center">
           <Target className="w-5 h-5 mr-2 text-amber-500" />
           Investment Profile
         </CardTitle>
-        <CardDescription className="text-slate-300">
+        <CardDescription className="text-gray-600">
           Help us understand your investment experience, objectives, and risk tolerance.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="investmentExperience" className="text-slate-200">
+            <Label htmlFor="investmentExperience" className="text-gray-700">
               Investment Experience *
             </Label>
             <Select
               onValueChange={(value) => setValue("investmentExperience", value)}
               defaultValue={initialData?.investmentExperience}
             >
-              <SelectTrigger className="bg-slate-700/50 border-slate-600 text-white">
+              <SelectTrigger className="bg-white border-gray-300 text-gray-900">
                 <SelectValue placeholder="Select your experience level" />
               </SelectTrigger>
-              <SelectContent className="bg-slate-800 border-slate-700">
+              <SelectContent className="bg-white border-gray-200">
                 <SelectItem value="beginner">Beginner (0-2 years)</SelectItem>
                 <SelectItem value="intermediate">Intermediate (2-5 years)</SelectItem>
                 <SelectItem value="experienced">Experienced (5-10 years)</SelectItem>
@@ -73,17 +73,17 @@ export function InvestmentProfileStep({ onNext, onBack, initialData }: Investmen
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="cryptoExperience" className="text-slate-200">
+            <Label htmlFor="cryptoExperience" className="text-gray-700">
               Cryptocurrency Experience *
             </Label>
             <Select
               onValueChange={(value) => setValue("cryptoExperience", value)}
               defaultValue={initialData?.cryptoExperience}
             >
-              <SelectTrigger className="bg-slate-700/50 border-slate-600 text-white">
+              <SelectTrigger className="bg-white border-gray-300 text-gray-900">
                 <SelectValue placeholder="Select your crypto experience" />
               </SelectTrigger>
-              <SelectContent className="bg-slate-800 border-slate-700">
+              <SelectContent className="bg-white border-gray-200">
                 <SelectItem value="none">No experience</SelectItem>
                 <SelectItem value="basic">Basic (bought/sold crypto)</SelectItem>
                 <SelectItem value="intermediate">Intermediate (active trading)</SelectItem>
@@ -94,17 +94,17 @@ export function InvestmentProfileStep({ onNext, onBack, initialData }: Investmen
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="riskTolerance" className="text-slate-200">
+            <Label htmlFor="riskTolerance" className="text-gray-700">
               Risk Tolerance *
             </Label>
             <Select
               onValueChange={(value) => setValue("riskTolerance", value)}
               defaultValue={initialData?.riskTolerance}
             >
-              <SelectTrigger className="bg-slate-700/50 border-slate-600 text-white">
+              <SelectTrigger className="bg-white border-gray-300 text-gray-900">
                 <SelectValue placeholder="Select your risk tolerance" />
               </SelectTrigger>
-              <SelectContent className="bg-slate-800 border-slate-700">
+              <SelectContent className="bg-white border-gray-200">
                 <SelectItem value="conservative">Conservative - Preserve capital, minimal risk</SelectItem>
                 <SelectItem value="moderate">Moderate - Balanced growth and risk</SelectItem>
                 <SelectItem value="aggressive">Aggressive - High growth potential, higher risk</SelectItem>
@@ -114,17 +114,17 @@ export function InvestmentProfileStep({ onNext, onBack, initialData }: Investmen
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="investmentHorizon" className="text-slate-200">
+            <Label htmlFor="investmentHorizon" className="text-gray-700">
               Investment Time Horizon *
             </Label>
             <Select
               onValueChange={(value) => setValue("investmentHorizon", value)}
               defaultValue={initialData?.investmentHorizon}
             >
-              <SelectTrigger className="bg-slate-700/50 border-slate-600 text-white">
+              <SelectTrigger className="bg-white border-gray-300 text-gray-900">
                 <SelectValue placeholder="Select your investment horizon" />
               </SelectTrigger>
-              <SelectContent className="bg-slate-800 border-slate-700">
+              <SelectContent className="bg-white border-gray-200">
                 <SelectItem value="short">Short-term (Less than 1 year)</SelectItem>
                 <SelectItem value="medium">Medium-term (1-5 years)</SelectItem>
                 <SelectItem value="long">Long-term (5-10 years)</SelectItem>
@@ -134,7 +134,7 @@ export function InvestmentProfileStep({ onNext, onBack, initialData }: Investmen
           </div>
 
           <div className="space-y-3">
-            <Label className="text-slate-200">Investment Goals (Select all that apply) *</Label>
+            <Label className="text-gray-700">Investment Goals (Select all that apply) *</Label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {[
                 "Capital Appreciation",
@@ -151,9 +151,9 @@ export function InvestmentProfileStep({ onNext, onBack, initialData }: Investmen
                     id={goal}
                     checked={investmentGoals.includes(goal)}
                     onCheckedChange={(checked) => handleGoalChange(goal, checked as boolean)}
-                    className="border-slate-600 data-[state=checked]:bg-amber-600"
+                    className="border-gray-300 data-[state=checked]:bg-amber-600"
                   />
-                  <Label htmlFor={goal} className="text-slate-300 text-sm">
+                  <Label htmlFor={goal} className="text-gray-600 text-sm">
                     {goal}
                   </Label>
                 </div>
@@ -162,17 +162,17 @@ export function InvestmentProfileStep({ onNext, onBack, initialData }: Investmen
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="tradingFrequency" className="text-slate-200">
+            <Label htmlFor="tradingFrequency" className="text-gray-700">
               Expected Trading Frequency *
             </Label>
             <Select
               onValueChange={(value) => setValue("tradingFrequency", value)}
               defaultValue={initialData?.tradingFrequency}
             >
-              <SelectTrigger className="bg-slate-700/50 border-slate-600 text-white">
+              <SelectTrigger className="bg-white border-gray-300 text-gray-900">
                 <SelectValue placeholder="Select trading frequency" />
               </SelectTrigger>
-              <SelectContent className="bg-slate-800 border-slate-700">
+              <SelectContent className="bg-white border-gray-200">
                 <SelectItem value="rarely">Rarely (Buy and hold)</SelectItem>
                 <SelectItem value="monthly">Monthly</SelectItem>
                 <SelectItem value="weekly">Weekly</SelectItem>
@@ -183,13 +183,13 @@ export function InvestmentProfileStep({ onNext, onBack, initialData }: Investmen
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="investmentStrategy" className="text-slate-200">
+            <Label htmlFor="investmentStrategy" className="text-gray-700">
               Preferred Investment Strategy
             </Label>
             <Textarea
               id="investmentStrategy"
               {...register("investmentStrategy")}
-              className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+              className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500"
               placeholder="Describe your investment strategy or approach (optional)"
               rows={3}
             />
@@ -200,7 +200,7 @@ export function InvestmentProfileStep({ onNext, onBack, initialData }: Investmen
               type="button"
               variant="outline"
               onClick={onBack}
-              className="border-slate-600 text-slate-300 hover:bg-slate-700 bg-transparent"
+              className="border-gray-300 text-gray-700 hover:bg-gray-50 bg-white"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back

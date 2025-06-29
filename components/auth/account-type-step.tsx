@@ -64,8 +64,8 @@ export function AccountTypeStep({ onNext, onBack, initialData }: AccountTypeStep
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-white">Select Account Type</CardTitle>
-        <CardDescription className="text-slate-300">
+        <CardTitle className="text-gray-900">Select Account Type</CardTitle>
+        <CardDescription className="text-gray-600">
           Choose the account type that best fits your investment needs and requirements.
         </CardDescription>
       </CardHeader>
@@ -79,36 +79,36 @@ export function AccountTypeStep({ onNext, onBack, initialData }: AccountTypeStep
                 className={`relative p-6 rounded-lg border-2 cursor-pointer transition-all ${
                   selectedType === type.id
                     ? "border-amber-500 bg-amber-500/10"
-                    : "border-slate-600 bg-slate-700/30 hover:border-slate-500"
+                    : "border-gray-300 bg-gray-50 hover:border-gray-400"
                 }`}
                 onClick={() => setSelectedType(type.id)}
               >
                 {type.premium && <Badge className="absolute top-4 right-4 bg-amber-600 text-white">Premium</Badge>}
 
                 <div className="flex items-start space-x-4">
-                  <div className={`p-3 rounded-lg ${selectedType === type.id ? "bg-amber-500" : "bg-slate-600"}`}>
+                  <div className={`p-3 rounded-lg ${selectedType === type.id ? "bg-amber-500" : "bg-gray-400"}`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
 
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-white mb-2">{type.title}</h3>
-                    <p className="text-slate-300 text-sm mb-4">{type.description}</p>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{type.title}</h3>
+                    <p className="text-gray-600 text-sm mb-4">{type.description}</p>
 
                     <div className="space-y-2 mb-4">
                       <div className="flex justify-between text-sm">
-                        <span className="text-slate-400">Minimum Deposit:</span>
-                        <span className="text-white font-medium">{type.minimumDeposit}</span>
+                        <span className="text-gray-500">Minimum Deposit:</span>
+                        <span className="text-gray-900 font-medium">{type.minimumDeposit}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-slate-400">Management Fee:</span>
-                        <span className="text-white font-medium">{type.fees}</span>
+                        <span className="text-gray-500">Management Fee:</span>
+                        <span className="text-gray-900 font-medium">{type.fees}</span>
                       </div>
                     </div>
 
                     <div className="space-y-1">
-                      <p className="text-xs text-slate-400 font-medium">Key Features:</p>
+                      <p className="text-xs text-gray-500 font-medium">Key Features:</p>
                       {type.features.map((feature, index) => (
-                        <div key={index} className="flex items-center text-xs text-slate-300">
+                        <div key={index} className="flex items-center text-xs text-gray-600">
                           <div className="w-1 h-1 bg-amber-500 rounded-full mr-2" />
                           {feature}
                         </div>
@@ -130,9 +130,9 @@ export function AccountTypeStep({ onNext, onBack, initialData }: AccountTypeStep
         </div>
 
         {selectedType && (
-          <div className="bg-slate-700/30 border border-slate-600 rounded-lg p-4 mb-6">
-            <h4 className="text-white font-medium mb-2">Selected Account Benefits</h4>
-            <div className="text-sm text-slate-300">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6">
+            <h4 className="text-gray-900 font-medium mb-2">Selected Account Benefits</h4>
+            <div className="text-sm text-gray-600">
               {selectedType === "individual" && (
                 <p>
                   Perfect for personal investors looking to build and manage their cryptocurrency portfolio with
@@ -166,7 +166,7 @@ export function AccountTypeStep({ onNext, onBack, initialData }: AccountTypeStep
             type="button"
             variant="outline"
             onClick={onBack}
-            className="border-slate-600 text-slate-300 hover:bg-slate-700 bg-transparent"
+            className="border-gray-300 text-gray-700 hover:bg-gray-50 bg-white"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back

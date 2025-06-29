@@ -83,9 +83,9 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="border-b border-slate-700 bg-slate-900/80 backdrop-blur-sm">
+      <div className="border-b border-gray-200 bg-white shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -93,11 +93,11 @@ export default function SignupPage() {
                 <Building className="w-6 h-6 text-white" />
               </div>
               <div>
-                <span className="text-xl font-bold text-white">Meridian Capital</span>
-                <div className="text-xs text-slate-400">Digital Asset Investment Bank</div>
+                <span className="text-xl font-bold text-gray-900">Meridian Capital</span>
+                <div className="text-xs text-gray-600">Digital Asset Investment Bank</div>
               </div>
             </div>
-            <Link href="/auth/login" className="text-slate-300 hover:text-white transition-colors">
+            <Link href="/auth/login" className="text-gray-600 hover:text-gray-900 transition-colors">
               Already have an account? Sign in
             </Link>
           </div>
@@ -111,18 +111,18 @@ export default function SignupPage() {
             <div className="mb-8">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h1 className="text-3xl font-bold text-white">Account Application</h1>
-                  <p className="text-slate-300">
+                  <h1 className="text-3xl font-bold text-gray-900">Account Application</h1>
+                  <p className="text-gray-600">
                     Step {currentStep} of {steps.length - 1}: {steps[currentStep - 1].title}
                   </p>
                 </div>
                 <div className="text-right">
-                  <div className="text-sm text-slate-400 mb-1">Progress</div>
+                  <div className="text-sm text-gray-500 mb-1">Progress</div>
                   <div className="text-2xl font-bold text-amber-500">{Math.round(progress)}%</div>
                 </div>
               </div>
 
-              <Progress value={progress} className="h-2 bg-slate-700" />
+              <Progress value={progress} className="h-2 bg-gray-200" />
 
               {/* Step indicators */}
               <div className="flex justify-between mt-4">
@@ -134,12 +134,12 @@ export default function SignupPage() {
                           ? "bg-amber-600 text-white"
                           : step.id === currentStep
                             ? "bg-amber-600 text-white"
-                            : "bg-slate-700 text-slate-400"
+                            : "bg-gray-200 text-gray-500"
                       }`}
                     >
                       {step.id < currentStep ? <Check className="w-4 h-4" /> : step.id}
                     </div>
-                    <div className="text-xs text-slate-400 mt-1 text-center max-w-20">{step.title}</div>
+                    <div className="text-xs text-gray-500 mt-1 text-center max-w-20">{step.title}</div>
                   </div>
                 ))}
               </div>
@@ -147,11 +147,11 @@ export default function SignupPage() {
           )}
 
           {/* Step Content */}
-          <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">{renderStep()}</Card>
+          <Card className="bg-white border-gray-200 shadow-lg">{renderStep()}</Card>
 
           {/* Footer */}
           {currentStep < 8 && (
-            <div className="text-center mt-6 text-xs text-slate-400">
+            <div className="text-center mt-6 text-xs text-gray-500">
               Your information is protected by bank-level security and encryption.
               <br />© 2024 Meridian Capital. Licensed and regulated by SEC, FCA, and MAS.
             </div>

@@ -31,40 +31,40 @@ export function ReviewStep({ onSubmit, onBack, formData, isSubmitting }: ReviewS
     <>
       <CardHeader>
         <CardTitle className="text-white">Review Your Application</CardTitle>
-        <CardDescription className="text-slate-300">
+        <CardDescription className="text-gray-600">
           Please review all information before submitting your application. You can go back to make changes if needed.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
           {/* Personal Information */}
-          <div className="bg-slate-700/30 border border-slate-600 rounded-lg p-4">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <div className="flex items-center mb-3">
               <User className="w-5 h-5 text-amber-500 mr-2" />
-              <h3 className="text-lg font-semibold text-white">Personal Information</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Personal Information</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-slate-400">Name:</span>
-                <span className="text-white ml-2">
+                <span className="text-gray-500">Name:</span>
+                <span className="text-gray-900 ml-2">
                   {formData.firstName} {formData.lastName}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400">Email:</span>
-                <span className="text-white ml-2">{formData.email}</span>
+                <span className="text-gray-500">Email:</span>
+                <span className="text-gray-900 ml-2">{formData.email}</span>
               </div>
               <div>
-                <span className="text-slate-400">Phone:</span>
-                <span className="text-white ml-2">{formData.phone}</span>
+                <span className="text-gray-500">Phone:</span>
+                <span className="text-gray-900 ml-2">{formData.phone}</span>
               </div>
               <div>
-                <span className="text-slate-400">Date of Birth:</span>
-                <span className="text-white ml-2">{formData.dateOfBirth}</span>
+                <span className="text-gray-500">Date of Birth:</span>
+                <span className="text-gray-900 ml-2">{formData.dateOfBirth}</span>
               </div>
               <div className="md:col-span-2">
-                <span className="text-slate-400">Address:</span>
-                <span className="text-white ml-2">
+                <span className="text-gray-500">Address:</span>
+                <span className="text-gray-900 ml-2">
                   {formData.address}, {formData.city}, {formData.state} {formData.zipCode}, {formData.country}
                 </span>
               </div>
@@ -72,130 +72,130 @@ export function ReviewStep({ onSubmit, onBack, formData, isSubmitting }: ReviewS
           </div>
 
           {/* Identity Verification */}
-          <div className="bg-slate-700/30 border border-slate-600 rounded-lg p-4">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <div className="flex items-center mb-3">
               <Shield className="w-5 h-5 text-amber-500 mr-2" />
-              <h3 className="text-lg font-semibold text-white">Identity Verification</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Identity Verification</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-slate-400">ID Type:</span>
-                <span className="text-white ml-2">{formData.idType?.replace("_", " ")}</span>
+                <span className="text-gray-500">ID Type:</span>
+                <span className="text-gray-900 ml-2">{formData.idType?.replace("_", " ")}</span>
               </div>
               <div>
-                <span className="text-slate-400">ID Number:</span>
-                <span className="text-white ml-2">{formData.idNumber}</span>
+                <span className="text-gray-500">ID Number:</span>
+                <span className="text-gray-900 ml-2">{formData.idNumber}</span>
               </div>
               <div>
-                <span className="text-slate-400">Documents:</span>
-                <span className="text-white ml-2">Uploaded and verified</span>
+                <span className="text-gray-500">Documents:</span>
+                <span className="text-gray-900 ml-2">Uploaded and verified</span>
               </div>
             </div>
           </div>
 
           {/* Financial Information */}
-          <div className="bg-slate-700/30 border border-slate-600 rounded-lg p-4">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <div className="flex items-center mb-3">
               <DollarSign className="w-5 h-5 text-amber-500 mr-2" />
-              <h3 className="text-lg font-semibold text-white">Financial Information</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Financial Information</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-slate-400">Employment:</span>
-                <span className="text-white ml-2">{formData.employmentStatus}</span>
+                <span className="text-gray-500">Employment:</span>
+                <span className="text-gray-900 ml-2">{formData.employmentStatus}</span>
               </div>
               <div>
-                <span className="text-slate-400">Industry:</span>
-                <span className="text-white ml-2">{formData.industry}</span>
+                <span className="text-gray-500">Industry:</span>
+                <span className="text-gray-900 ml-2">{formData.industry}</span>
               </div>
               <div>
-                <span className="text-slate-400">Annual Income:</span>
-                <span className="text-white ml-2">{formData.annualIncome}</span>
+                <span className="text-gray-500">Annual Income:</span>
+                <span className="text-gray-900 ml-2">{formData.annualIncome}</span>
               </div>
               <div>
-                <span className="text-slate-400">Net Worth:</span>
-                <span className="text-white ml-2">{formData.netWorth}</span>
+                <span className="text-gray-500">Net Worth:</span>
+                <span className="text-gray-900 ml-2">{formData.netWorth}</span>
               </div>
               <div>
-                <span className="text-slate-400">Expected Investment:</span>
-                <span className="text-white ml-2">{formData.expectedInvestment}</span>
+                <span className="text-gray-500">Expected Investment:</span>
+                <span className="text-gray-900 ml-2">{formData.expectedInvestment}</span>
               </div>
             </div>
           </div>
 
           {/* Investment Profile */}
-          <div className="bg-slate-700/30 border border-slate-600 rounded-lg p-4">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <div className="flex items-center mb-3">
               <Target className="w-5 h-5 text-amber-500 mr-2" />
-              <h3 className="text-lg font-semibold text-white">Investment Profile</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Investment Profile</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-slate-400">Experience:</span>
-                <span className="text-white ml-2">{formData.investmentExperience}</span>
+                <span className="text-gray-500">Experience:</span>
+                <span className="text-gray-900 ml-2">{formData.investmentExperience}</span>
               </div>
               <div>
-                <span className="text-slate-400">Crypto Experience:</span>
-                <span className="text-white ml-2">{formData.cryptoExperience}</span>
+                <span className="text-gray-500">Crypto Experience:</span>
+                <span className="text-gray-900 ml-2">{formData.cryptoExperience}</span>
               </div>
               <div>
-                <span className="text-slate-400">Risk Tolerance:</span>
-                <span className="text-white ml-2">{formData.riskTolerance}</span>
+                <span className="text-gray-500">Risk Tolerance:</span>
+                <span className="text-gray-900 ml-2">{formData.riskTolerance}</span>
               </div>
               <div>
-                <span className="text-slate-400">Time Horizon:</span>
-                <span className="text-white ml-2">{formData.investmentHorizon}</span>
+                <span className="text-gray-500">Time Horizon:</span>
+                <span className="text-gray-900 ml-2">{formData.investmentHorizon}</span>
               </div>
               {formData.investmentGoals && formData.investmentGoals.length > 0 && (
                 <div className="md:col-span-2">
-                  <span className="text-slate-400">Investment Goals:</span>
-                  <span className="text-white ml-2">{formData.investmentGoals.join(", ")}</span>
+                  <span className="text-gray-500">Investment Goals:</span>
+                  <span className="text-gray-900 ml-2">{formData.investmentGoals.join(", ")}</span>
                 </div>
               )}
             </div>
           </div>
 
           {/* Account Type */}
-          <div className="bg-slate-700/30 border border-slate-600 rounded-lg p-4">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <div className="flex items-center mb-3">
               <Building className="w-5 h-5 text-amber-500 mr-2" />
-              <h3 className="text-lg font-semibold text-white">Account Type</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Account Type</h3>
             </div>
             <div className="text-sm">
-              <span className="text-slate-400">Selected Account:</span>
-              <span className="text-white ml-2">{formatAccountType(formData.accountType)}</span>
+              <span className="text-gray-500">Selected Account:</span>
+              <span className="text-gray-900 ml-2">{formatAccountType(formData.accountType)}</span>
             </div>
           </div>
 
           {/* Compliance Status */}
-          <div className="bg-slate-700/30 border border-slate-600 rounded-lg p-4">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <div className="flex items-center mb-3">
               <FileCheck className="w-5 h-5 text-amber-500 mr-2" />
-              <h3 className="text-lg font-semibold text-white">Compliance Status</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Compliance Status</h3>
             </div>
             <div className="space-y-2 text-sm">
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2" />
-                <span className="text-slate-300">Risk Disclosure Acknowledged</span>
+                <span className="text-gray-600">Risk Disclosure Acknowledged</span>
               </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2" />
-                <span className="text-slate-300">Terms of Service Accepted</span>
+                <span className="text-gray-600">Terms of Service Accepted</span>
               </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2" />
-                <span className="text-slate-300">Privacy Policy Acknowledged</span>
+                <span className="text-gray-600">Privacy Policy Acknowledged</span>
               </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2" />
-                <span className="text-slate-300">AML Compliance Confirmed</span>
+                <span className="text-gray-600">AML Compliance Confirmed</span>
               </div>
             </div>
           </div>
 
-          <Alert className="bg-amber-900/20 border-amber-700">
+          <Alert className="bg-amber-50 border-amber-200">
             <FileCheck className="h-4 w-4 text-amber-500" />
-            <AlertDescription className="text-amber-200">
+            <AlertDescription className="text-amber-800">
               By submitting this application, you confirm that all information provided is accurate and complete. Your
               application will be reviewed by our compliance team within 2-3 business days.
             </AlertDescription>
@@ -206,7 +206,7 @@ export function ReviewStep({ onSubmit, onBack, formData, isSubmitting }: ReviewS
               type="button"
               variant="outline"
               onClick={onBack}
-              className="border-slate-600 text-slate-300 hover:bg-slate-700 bg-transparent"
+              className="border-gray-300 text-gray-700 hover:bg-gray-50 bg-white"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back

@@ -30,8 +30,8 @@ export function PersonalInfoStep({ onNext, initialData }: PersonalInfoStepProps)
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-white">Personal Information</CardTitle>
-        <CardDescription className="text-slate-300">
+        <CardTitle className="text-gray-900">Personal Information</CardTitle>
+        <CardDescription className="text-gray-600">
           Please provide your basic personal details to begin the application process.
         </CardDescription>
       </CardHeader>
@@ -39,26 +39,26 @@ export function PersonalInfoStep({ onNext, initialData }: PersonalInfoStepProps)
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="firstName" className="text-slate-200">
+              <Label htmlFor="firstName" className="text-gray-700">
                 First Name *
               </Label>
               <Input
                 id="firstName"
                 {...register("firstName", { required: "First name is required" })}
-                className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500"
                 placeholder="Enter your first name"
               />
               {errors.firstName && <p className="text-red-400 text-sm">{errors.firstName.message as string}</p>}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="lastName" className="text-slate-200">
+              <Label htmlFor="lastName" className="text-gray-700">
                 Last Name *
               </Label>
               <Input
                 id="lastName"
                 {...register("lastName", { required: "Last name is required" })}
-                className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500"
                 placeholder="Enter your last name"
               />
               {errors.lastName && <p className="text-red-400 text-sm">{errors.lastName.message as string}</p>}
@@ -66,7 +66,7 @@ export function PersonalInfoStep({ onNext, initialData }: PersonalInfoStepProps)
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-slate-200">
+            <Label htmlFor="email" className="text-gray-700">
               Email Address *
             </Label>
             <Input
@@ -79,7 +79,7 @@ export function PersonalInfoStep({ onNext, initialData }: PersonalInfoStepProps)
                   message: "Invalid email address",
                 },
               })}
-              className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+              className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500"
               placeholder="Enter your email address"
             />
             {errors.email && <p className="text-red-400 text-sm">{errors.email.message as string}</p>}
@@ -87,41 +87,41 @@ export function PersonalInfoStep({ onNext, initialData }: PersonalInfoStepProps)
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="phone" className="text-slate-200">
+              <Label htmlFor="phone" className="text-gray-700">
                 Phone Number *
               </Label>
               <Input
                 id="phone"
                 type="tel"
                 {...register("phone", { required: "Phone number is required" })}
-                className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500"
                 placeholder="+1 (555) 123-4567"
               />
               {errors.phone && <p className="text-red-400 text-sm">{errors.phone.message as string}</p>}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="dateOfBirth" className="text-slate-200">
+              <Label htmlFor="dateOfBirth" className="text-gray-700">
                 Date of Birth *
               </Label>
               <Input
                 id="dateOfBirth"
                 type="date"
                 {...register("dateOfBirth", { required: "Date of birth is required" })}
-                className="bg-slate-700/50 border-slate-600 text-white"
+                className="bg-white border-gray-300 text-gray-900"
               />
               {errors.dateOfBirth && <p className="text-red-400 text-sm">{errors.dateOfBirth.message as string}</p>}
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="address" className="text-slate-200">
+            <Label htmlFor="address" className="text-gray-700">
               Street Address *
             </Label>
             <Input
               id="address"
               {...register("address", { required: "Address is required" })}
-              className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+              className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500"
               placeholder="Enter your street address"
             />
             {errors.address && <p className="text-red-400 text-sm">{errors.address.message as string}</p>}
@@ -129,39 +129,39 @@ export function PersonalInfoStep({ onNext, initialData }: PersonalInfoStepProps)
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="city" className="text-slate-200">
+              <Label htmlFor="city" className="text-gray-700">
                 City *
               </Label>
               <Input
                 id="city"
                 {...register("city", { required: "City is required" })}
-                className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500"
                 placeholder="Enter your city"
               />
               {errors.city && <p className="text-red-400 text-sm">{errors.city.message as string}</p>}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="state" className="text-slate-200">
+              <Label htmlFor="state" className="text-gray-700">
                 State/Province *
               </Label>
               <Input
                 id="state"
                 {...register("state", { required: "State is required" })}
-                className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500"
                 placeholder="Enter your state"
               />
               {errors.state && <p className="text-red-400 text-sm">{errors.state.message as string}</p>}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="zipCode" className="text-slate-200">
+              <Label htmlFor="zipCode" className="text-gray-700">
                 ZIP/Postal Code *
               </Label>
               <Input
                 id="zipCode"
                 {...register("zipCode", { required: "ZIP code is required" })}
-                className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-500"
                 placeholder="Enter your ZIP code"
               />
               {errors.zipCode && <p className="text-red-400 text-sm">{errors.zipCode.message as string}</p>}
@@ -169,14 +169,14 @@ export function PersonalInfoStep({ onNext, initialData }: PersonalInfoStepProps)
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="country" className="text-slate-200">
+            <Label htmlFor="country" className="text-gray-700">
               Country *
             </Label>
             <Select onValueChange={(value) => setValue("country", value)} defaultValue={initialData?.country}>
-              <SelectTrigger className="bg-slate-700/50 border-slate-600 text-white">
+              <SelectTrigger className="bg-white border-gray-300 text-gray-900">
                 <SelectValue placeholder="Select your country" />
               </SelectTrigger>
-              <SelectContent className="bg-slate-800 border-slate-700">
+              <SelectContent className="bg-white border-gray-200">
                 <SelectItem value="US">United States</SelectItem>
                 <SelectItem value="CA">Canada</SelectItem>
                 <SelectItem value="GB">United Kingdom</SelectItem>
