@@ -7,13 +7,22 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, ArrowLeft, Upload, Shield } from "lucide-react"
+import { ArrowRight, ArrowLeft, Upload, Shield, X, Eye } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import Image from "next/image"
 
 interface IdentityVerificationStepProps {
   onNext: (data: any) => void
   onBack: () => void
   initialData: any
+}
+
+interface UploadedDocument {
+  fileId: string
+  fileName: string
+  publicUrl: string
+  fileType: string
+  fileSize: number
 }
 
 export function IdentityVerificationStep({ onNext, onBack, initialData }: IdentityVerificationStepProps) {
@@ -25,18 +34,169 @@ export function IdentityVerificationStep({ onNext, onBack, initialData }: Identi
   } = useForm({
     defaultValues: initialData,
   })
-  const [uploadedFiles, setUploadedFiles] = useState<{ [key: string]: File | null }>({
-    idFront: null,
-    idBack: null,
-    proofOfAddress: null,
+
+  const [uploadedFiles, setUploadedFiles] = useState<{ [key: string]: UploadedDocument | null }>({
+    idFront: initialData?.uploadedFiles?.idFront || null,
+    idBack: initialData?.uploadedFiles?.idBack || null,
+    proofOfAddress: initialData?.uploadedFiles?.proofOfAddress || null,
+  })
+
+  const [uploadingFiles, setUploadingFiles] = useState<{ [key: string]: boolean }>({
+    idFront: false,
+    idBack: false,
+    proofOfAddress: false,
   })
 
   const onSubmit = (data: any) => {
     onNext({ ...data, uploadedFiles })
   }
 
-  const handleFileUpload = (type: string, file: File | null) => {
-    setUploadedFiles((prev) => ({ ...prev, [type]: file }))
+  const handleFileUpload = async (documentType: string, file: File) => {
+    if (!file) return
+
+    setUploadingFiles((prev) => ({ ...prev, [documentType]: true }))
+
+    try {
+      const formData = new FormData()
+      formData.append("file", file)
+      formData.append("documentType", documentType)
+      formData.append("applicationId", "temp_" + Date.now())
+
+      const response = await fetch("/api/auth/upload-document", {
+        method: "POST",
+        body: formData,
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setUploadedFiles((prev) => ({
+          ...prev,
+          [documentType]: {
+            fileId: result.fileId,
+            fileName: result.fileName,
+            publicUrl: result.publicUrl,
+            fileType: result.fileType,
+            fileSize: result.fileSize,
+          },
+        }))
+      } else {
+        alert(result.error || "Upload failed")
+      }
+    } catch (error) {
+      console.error("Upload error:", error)
+      alert("Upload failed. Please try again.")
+    } finally {
+      setUploadingFiles((prev) => ({ ...prev, [documentType]: false }))
+    }
+  }
+
+  const removeFile = (documentType: string) => {
+    setUploadedFiles((prev) => ({ ...prev, [documentType]: null }))
+  }
+
+  const isImage = (fileType: string) => {
+    return fileType.startsWith("image/")
+  }
+
+  const formatFileSize = (bytes: number) => {
+    if (bytes === 0) return "0 Bytes"
+    const k = 1024
+    const sizes = ["Bytes", "KB", "MB", "GB"]
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+    return Number.parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
+  }
+
+  const FileUploadArea = ({
+    documentType,
+    label,
+    description,
+  }: {
+    documentType: string
+    label: string
+    description: string
+  }) => {
+    const uploadedFile = uploadedFiles[documentType]
+    const isUploading = uploadingFiles[documentType]
+
+    return (
+      <div className="space-y-2">
+        <Label className="text-gray-700">{label} *</Label>
+
+        {uploadedFile ? (
+          <div className="border border-gray-300 rounded-lg p-4 bg-gray-50">
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex-1">
+                <p className="text-sm font-medium text-gray-900">{uploadedFile.fileName}</p>
+                <p className="text-xs text-gray-500">{formatFileSize(uploadedFile.fileSize)}</p>
+              </div>
+              <div className="flex items-center space-x-2">
+                {isImage(uploadedFile.fileType) && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => window.open(uploadedFile.publicUrl, "_blank")}
+                    className="border-gray-300 text-gray-700 hover:bg-gray-100"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </Button>
+                )}
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => removeFile(documentType)}
+                  className="border-red-300 text-red-700 hover:bg-red-50"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+
+            {isImage(uploadedFile.fileType) && (
+              <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden">
+                <Image
+                  src={uploadedFile.publicUrl || "/placeholder.svg"}
+                  alt={`Preview of ${uploadedFile.fileName}`}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-gray-400 transition-colors">
+            <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+            <p className="text-sm text-gray-600 mb-2">{description}</p>
+            <input
+              type="file"
+              accept="image/*,.pdf"
+              onChange={(e) => {
+                const file = e.target.files?.[0]
+                if (file) {
+                  handleFileUpload(documentType, file)
+                }
+              }}
+              className="hidden"
+              id={documentType}
+              disabled={isUploading}
+            />
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => document.getElementById(documentType)?.click()}
+              className="border-gray-300 text-gray-700 hover:bg-gray-50"
+              disabled={isUploading}
+            >
+              {isUploading ? "Uploading..." : "Choose File"}
+            </Button>
+          </div>
+        )}
+      </div>
+    )
   }
 
   return (
@@ -138,86 +298,24 @@ export function IdentityVerificationStep({ onNext, onBack, initialData }: Identi
             <h3 className="text-lg font-semibold text-gray-900">Document Upload</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-gray-700">ID Front Side *</Label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-gray-400 transition-colors">
-                  <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                  <p className="text-sm text-gray-600 mb-2">
-                    {uploadedFiles.idFront ? uploadedFiles.idFront.name : "Upload front side of ID"}
-                  </p>
-                  <input
-                    type="file"
-                    accept="image/*,.pdf"
-                    onChange={(e) => handleFileUpload("idFront", e.target.files?.[0] || null)}
-                    className="hidden"
-                    id="idFront"
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => document.getElementById("idFront")?.click()}
-                    className="border-gray-300 text-gray-700 hover:bg-gray-50"
-                  >
-                    Choose File
-                  </Button>
-                </div>
-              </div>
+              <FileUploadArea
+                documentType="idFront"
+                label="ID Front Side"
+                description="Upload front side of your government ID"
+              />
 
-              <div className="space-y-2">
-                <Label className="text-gray-700">ID Back Side *</Label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-gray-400 transition-colors">
-                  <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                  <p className="text-sm text-gray-600 mb-2">
-                    {uploadedFiles.idBack ? uploadedFiles.idBack.name : "Upload back side of ID"}
-                  </p>
-                  <input
-                    type="file"
-                    accept="image/*,.pdf"
-                    onChange={(e) => handleFileUpload("idBack", e.target.files?.[0] || null)}
-                    className="hidden"
-                    id="idBack"
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => document.getElementById("idBack")?.click()}
-                    className="border-gray-300 text-gray-700 hover:bg-gray-50"
-                  >
-                    Choose File
-                  </Button>
-                </div>
-              </div>
+              <FileUploadArea
+                documentType="idBack"
+                label="ID Back Side"
+                description="Upload back side of your government ID"
+              />
             </div>
 
-            <div className="space-y-2">
-              <Label className="text-gray-700">Proof of Address *</Label>
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-gray-400 transition-colors">
-                <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                <p className="text-sm text-gray-600 mb-2">
-                  {uploadedFiles.proofOfAddress
-                    ? uploadedFiles.proofOfAddress.name
-                    : "Upload utility bill, bank statement, or lease agreement (within 3 months)"}
-                </p>
-                <input
-                  type="file"
-                  accept="image/*,.pdf"
-                  onChange={(e) => handleFileUpload("proofOfAddress", e.target.files?.[0] || null)}
-                  className="hidden"
-                  id="proofOfAddress"
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => document.getElementById("proofOfAddress")?.click()}
-                  className="border-gray-300 text-gray-700 hover:bg-gray-50"
-                >
-                  Choose File
-                </Button>
-              </div>
-            </div>
+            <FileUploadArea
+              documentType="proofOfAddress"
+              label="Proof of Address"
+              description="Upload utility bill, bank statement, or lease agreement (within 3 months)"
+            />
           </div>
 
           <div className="flex justify-between pt-6">
@@ -230,7 +328,11 @@ export function IdentityVerificationStep({ onNext, onBack, initialData }: Identi
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
             </Button>
-            <Button type="submit" className="bg-amber-600 hover:bg-amber-700 text-white">
+            <Button
+              type="submit"
+              className="bg-amber-600 hover:bg-amber-700 text-white"
+              disabled={Object.values(uploadingFiles).some(Boolean)}
+            >
               Continue
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>

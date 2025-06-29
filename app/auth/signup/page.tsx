@@ -49,12 +49,29 @@ export default function SignupPage() {
     setIsSubmitting(true)
     const completeData = { ...formData, ...finalData }
 
-    // Simulate API submission
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(completeData),
+      })
 
-    setFormData(completeData)
-    setCurrentStep(8) // Success step
-    setIsSubmitting(false)
+      const result = await response.json()
+
+      if (result.success) {
+        setFormData(completeData)
+        setCurrentStep(8) // Success step
+      } else {
+        alert(result.error || "Signup failed")
+      }
+    } catch (error) {
+      console.error("Signup error:", error)
+      alert("Signup failed. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const renderStep = () => {

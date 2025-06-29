@@ -1,11 +1,12 @@
 "use client"
+
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, User } from "lucide-react"
 
 interface PersonalInfoStepProps {
   onNext: (data: any) => void
@@ -18,7 +19,6 @@ export function PersonalInfoStep({ onNext, initialData }: PersonalInfoStepProps)
     handleSubmit,
     formState: { errors },
     setValue,
-    watch,
   } = useForm({
     defaultValues: initialData,
   })
@@ -30,9 +30,12 @@ export function PersonalInfoStep({ onNext, initialData }: PersonalInfoStepProps)
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-gray-900">Personal Information</CardTitle>
+        <CardTitle className="text-gray-900 flex items-center">
+          <User className="w-5 h-5 mr-2 text-amber-500" />
+          Personal Information
+        </CardTitle>
         <CardDescription className="text-gray-600">
-          Please provide your basic personal details to begin the application process.
+          Please provide your basic personal information to get started.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -181,12 +184,10 @@ export function PersonalInfoStep({ onNext, initialData }: PersonalInfoStepProps)
                 <SelectItem value="CA">Canada</SelectItem>
                 <SelectItem value="GB">United Kingdom</SelectItem>
                 <SelectItem value="AU">Australia</SelectItem>
-                <SelectItem value="SG">Singapore</SelectItem>
-                <SelectItem value="CH">Switzerland</SelectItem>
                 <SelectItem value="DE">Germany</SelectItem>
                 <SelectItem value="FR">France</SelectItem>
                 <SelectItem value="JP">Japan</SelectItem>
-                <SelectItem value="HK">Hong Kong</SelectItem>
+                <SelectItem value="SG">Singapore</SelectItem>
               </SelectContent>
             </Select>
           </div>

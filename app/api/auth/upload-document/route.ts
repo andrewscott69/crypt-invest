@@ -1,4 +1,8 @@
+import { createClient } from "@supabase/supabase-js"
 import { type NextRequest, NextResponse } from "next/server"
+
+// Initialize Supabase client
+const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 
 export async function POST(request: NextRequest) {
   try {
@@ -30,32 +34,49 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "File size too large. Maximum size is 10MB." }, { status: 400 })
     }
 
-    // In a real application, you would:
-    // 1. Upload the file to cloud storage (AWS S3, Google Cloud, etc.)
-    // 2. Run virus scanning
-    // 3. Extract text/data for verification
-    // 4. Store file metadata in database
+    // Generate unique filename
+    const fileExtension = file.name.split(".").pop()
+    const fileName = `${applicationId || "temp"}_${documentType}_${Date.now()}.${fileExtension}`
+    const filePath = `documents/${fileName}`
 
-    // Simulate file processing
-    const fileId = `doc_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-    const fileUrl = `/uploads/${fileId}.${file.name.split(".").pop()}`
+    // Convert File to ArrayBuffer
+    const fileBuffer = await file.arrayBuffer()
 
-    // Simulate file upload delay
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    // Upload to Supabase Storage
+    const { data, error } = await supabase.storage.from("kyc-documents").upload(filePath, fileBuffer, {
+      contentType: file.type,
+      upsert: false,
+    })
+
+    if (error) {
+      console.error("Supabase upload error:", error)
+      return NextResponse.json({ error: "Failed to upload document to storage" }, { status: 500 })
+    }
+
+    // Get public URL
+    const { data: urlData } = supabase.storage.from("kyc-documents").getPublicUrl(filePath)
+
+    const publicUrl = urlData.publicUrl
+
+    // Store document metadata (in a real app, you'd save this to your database)
+    const documentMetadata = {
+      fileId: data.path,
+      fileName: file.name,
+      fileSize: file.size,
+      fileType: file.type,
+      documentType,
+      applicationId,
+      publicUrl,
+      uploadedAt: new Date().toISOString(),
+      status: "uploaded",
+    }
 
     return NextResponse.json({
       success: true,
-      fileId,
-      fileUrl,
-      fileName: file.name,
-      fileSize: file.size,
-      documentType,
-      uploadedAt: new Date().toISOString(),
-      status: "uploaded",
+      ...documentMetadata,
     })
   } catch (error) {
     console.error("Document upload API error:", error)
-
     return NextResponse.json({ error: "Failed to upload document" }, { status: 500 })
   }
 }
